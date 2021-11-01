@@ -1,5 +1,28 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<h1>Hello, @name.Name!</h1>
 
-Welcome to your new app.
+<div class="card-body">
+	<EditForm Model="@name" OnValidSubmit="@HandleValidSubmit">
+		<DataAnnotationsValidator />
+		<ValidationSummary />
+		<div class="form-group">
+			<label for="nameInput">Name</label>
+			<InputText class="form-control" id="nameInput" @bind-Value="name.Name" /> 
+		</div>
+		<div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</EditForm>
+	<div>@valid</div>
+</div>
+
+@code {
+	private NameModel name = new NameModel { Name = "Dima" };
+	private string valid = "";
+
+	public void HandleValidSubmit()
+	{
+		valid = "Valid!";
+	}
+}
