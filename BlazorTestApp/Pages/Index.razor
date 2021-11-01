@@ -1,14 +1,22 @@
 ﻿@page "/"
 
-<h1>Hello, @name.Name!</h1>
+<h1>Hello, @user.Name!</h1>
 
 <div class="card-body">
-	<EditForm Model="@name" OnValidSubmit="@HandleValidSubmit">
+	<EditForm Model="@user" OnValidSubmit="@HandleValidSubmit">
 		<DataAnnotationsValidator />
 		<ValidationSummary />
 		<div class="form-group">
-			<label for="nameInput">Name</label>
-			<InputText class="form-control" id="nameInput" @bind-Value="name.Name" /> 
+			<label>
+				Name:
+				<InputText class="form-control" id="nameInput" @bind-Value="user.Name" /> 
+			</label>
+		</div>
+		<div>
+			<label>
+				Are you ready?
+				<InputCheckbox @bind-Value="user.IsReady" />
+        </label>
 		</div>
 		<div>
 			<button type="submit" class="btn btn-primary">Submit</button>
@@ -18,7 +26,7 @@
 </div>
 
 @code {
-	private NameModel name = new NameModel { Name = "Dima" };
+	private UserModel user = new UserModel { Name = "Dima" };
 	private string valid = "";
 
 	public void HandleValidSubmit()

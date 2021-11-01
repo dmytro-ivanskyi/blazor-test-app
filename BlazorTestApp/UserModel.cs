@@ -2,10 +2,15 @@
 
 namespace BlazorTestApp
 {
-    public class NameModel
+    public class UserModel
     {
         [Required]
         [MinLength(3, ErrorMessage = "You nead at least 3 letters!")]
         public string Name { get; set; }
+
+        [Required]
+        [Range(typeof(bool), "true", "true",
+        ErrorMessage = "You need to be ready!")]
+        public bool IsReady { get; set; }
     }
 }
