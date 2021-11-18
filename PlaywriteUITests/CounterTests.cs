@@ -21,7 +21,7 @@ namespace PlaywrightUITests
 
             await page.ClickAsync("text=Click Me", new PageClickOptions
             {
-                ClickCount = 3,
+                ClickCount = 3
             });
 
             var counter = await page.QuerySelectorAsync("text=Current count:");
