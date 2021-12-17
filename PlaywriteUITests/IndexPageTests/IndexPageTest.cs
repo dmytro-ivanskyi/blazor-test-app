@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace PlaywrightUITests
 {
     [Parallelizable(ParallelScope.Self)]
-    public class Tests
+    public class IndexPageTests
     {
         private IBrowser _browser;
 
