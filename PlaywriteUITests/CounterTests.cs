@@ -25,8 +25,9 @@ namespace PlaywrightUITests
             });
 
             var counter = await page.QuerySelectorAsync("text=Current count:");
+            var actual_count = await counter.InnerTextAsync();
 
-            Assert.AreEqual(EXPECTED_COUNT_TEXT, await counter.InnerTextAsync());
+            Assert.AreEqual(EXPECTED_COUNT_TEXT, actual_count);
         }
     }
 }
