@@ -1,50 +1,37 @@
-using Microsoft.Playwright;
+using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 using System.Threading.Tasks;
 
 namespace PlaywrightUITests
 {
+    //[Ignore("skip")]
     [Parallelizable(ParallelScope.Self)]
-    public class IndexPageTests
+    public class IndexPageTests : PageTest
     {
-        private IBrowser _browser;
-
-        [SetUp]
-        public async Task Setup()
-        {
-            using var playwright = await Playwright.CreateAsync();
-            await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
-            {
-                Headless = false,
-                SlowMo = 3000
-            });
-            _browser = browser;
-        }
+        private const string URL = "http://localhost:5000/";
 
         [Test]
         public async Task IndexPageTitle_IsCorrectAsync()
         {
-            
+            const string EXPECTED_TITLE = "BlazorTestApp";
 
-            var page = await _browser.NewPageAsync();
+            await Page.GotoAsync(URL);
+            var actual_title = await Page.TitleAsync();
 
-            await page.GotoAsync("http://localhost:5000/");
-            var title = await page.QuerySelectorAsync("title");
-
-            Assert.AreEqual("BlazorTestApp", await title.InnerTextAsync());
+            Assert.AreEqual(EXPECTED_TITLE, actual_title);
         }
 
 
         [Test]
         public async Task IndexPage_ClickSubmitWithCheckbox_IsValid()
         {
+            const string EXPECTED_MESSAGE = "You need to be ready!";
+            await Page.GotoAsync(URL);
+            // await Page.CheckAsync("input[type=\"checkbox\"]");
+            await Page.ClickAsync("text=Submit");
+            var actual_message = await Page.QuerySelectorAsync(".validation-message");
 
-            var page = await _browser.NewPageAsync();
-
-            await page.GotoAsync("http://localhost:5000/");
-            var title = await page.QuerySelectorAsync("title");
-
-            Assert.AreEqual("BlazorTestApp", await title.InnerTextAsync());
+            Assert.AreEqual(EXPECTED_MESSAGE, await actual_message.InnerTextAsync());
         }
     }
 }
