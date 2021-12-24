@@ -3,32 +3,42 @@
 <h1>Hello, @user.Name!</h1>
 
 <div class="card-body">
-	<EditForm Model="@user" OnValidSubmit="@HandleValidSubmit">
-		<DataAnnotationsValidator />
-		<ValidationSummary />
+	<EditForm Model="@user" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+		
+		
 		<div class="form-group">
 			<label>
 				Name:
-				<InputText class="form-control" id="nameInput" @bind-Value="user.Name" /> 
 			</label>
+			<div>
+				<InputText class="form-control" id="nameInput" @bind-Value="user.Name" />
+				<ValidationMessage For="@(() => user.Name)" />
+			</div>
 		</div>
 		<div>
 			<label>
 				Are you ready?
+			</label>
 				<InputCheckbox @bind-Value="user.IsReady" />
-        </label>
+				<ValidationMessage For="@(() => user.IsReady)" />
 		</div>
 		<div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</div>
+		<DataAnnotationsValidator />
 	</EditForm>
 </div>
 
 @code {
-	private UserModel user = new UserModel { Name = "Dima" };
+	private UserModel user = new UserModel { Name = "New User" };
 
 	public void HandleValidSubmit()
 	{
-		user = new UserModel { Name = "New User"};
+		////user.Name = 
+	}
+
+	public void HandleInvalidSubmit()
+	{
+		user.Name = "New User";
 	}
 }
