@@ -23,7 +23,7 @@ namespace PlaywrightUITests
 
 
         [Test]
-        public async Task IndexPage_ClickSubmitWithCheckbox_IsValid()
+        public async Task IndexPage_ClickSubmitWithoutCheckbox_IsInvalid()
         {
             const string EXPECTED_MESSAGE = "You need to be ready!";
             await Page.GotoAsync(URL);
