@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace PlaywrightUITests
 {
+    [Ignore("skip")]
     public class CounterTests
     {
         [Test]
@@ -16,9 +17,9 @@ namespace PlaywrightUITests
                 Headless = false,
                 SlowMo = 3000
             });
+
             var page = await browser.NewPageAsync();
             await page.GotoAsync("http://localhost:5000/counter");
-
             await page.ClickAsync("text=Click Me", new PageClickOptions
             {
                 ClickCount = 3
