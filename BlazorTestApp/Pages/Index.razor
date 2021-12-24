@@ -22,15 +22,13 @@
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</div>
 	</EditForm>
-	<div>@valid</div>
 </div>
 
 @code {
 	private UserModel user = new UserModel { Name = "Dima" };
-	private string valid = "";
 
 	public void HandleValidSubmit()
 	{
-		valid = "Valid!";
+		user = new UserModel { Name = "New User"};
 	}
 }
