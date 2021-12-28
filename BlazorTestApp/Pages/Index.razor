@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-<h1>Hello, @user.Name!</h1>
+<h1>Hello, @userName!</h1>
 
 <div class="card-body">
 	<EditForm Model="@user" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
@@ -31,10 +31,11 @@
 
 @code {
 	private UserModel user = new UserModel { Name = "New User" };
+	private string userName = "New User";
 
 	public void HandleValidSubmit()
 	{
-		////user.Name = 
+		userName = user.Name; 
 	}
 
 	public void HandleInvalidSubmit()
