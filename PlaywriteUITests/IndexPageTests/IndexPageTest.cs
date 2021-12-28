@@ -21,13 +21,27 @@ namespace PlaywrightUITests
             Assert.AreEqual(EXPECTED_TITLE, actual_title);
         }
 
+        [Test]
+        public async Task IndexPage_ClickSubmitWithFilledForm_ShowsGreeting()
+        {
+            const string NAME = "John Doe";
+            const string EXPECTED_GREETING = "Hello, John Doe!";
+
+            await Page.GotoAsync(URL);
+            await Page.FillAsync("input", NAME);
+            await Page.CheckAsync("input[type=\"checkbox\"]");
+            await Page.ClickAsync("text=Submit");
+            var actual_greeting = await Page.QuerySelectorAsync("h1");
+
+            Assert.AreEqual(EXPECTED_GREETING, await actual_greeting.InnerTextAsync());
+        }
 
         [Test]
-        public async Task IndexPage_ClickSubmitWithoutCheckbox_IsInvalid()
+        public async Task IndexPage_ClickSubmitWithoutCheckbox_ShowsValidationMessage()
         {
             const string EXPECTED_MESSAGE = "You need to be ready!";
+
             await Page.GotoAsync(URL);
-            // await Page.CheckAsync("input[type=\"checkbox\"]");
             await Page.ClickAsync("text=Submit");
             var actual_message = await Page.QuerySelectorAsync(".validation-message");
 
