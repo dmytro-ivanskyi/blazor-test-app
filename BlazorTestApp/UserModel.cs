@@ -5,7 +5,7 @@ namespace BlazorTestApp
     public class UserModel
     {
         [Required]
-        [MinLength(3, ErrorMessage = "You nead at least 3 letters!")]
+        [MinLength(3, ErrorMessage = "You need at least 3 letters!")]
         public string Name { get; set; }
 
         [Required]
