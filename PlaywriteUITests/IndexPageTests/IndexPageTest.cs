@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace PlaywrightUITests
 {
-    //[Ignore("skip")]
-    [Parallelizable(ParallelScope.Self)]
+    // [Ignore("skip")]
+    // [Parallelizable(ParallelScope.Self)]
     public class IndexPageTests : PageTest
     {
         private const string URL = "http://localhost:5000/";
