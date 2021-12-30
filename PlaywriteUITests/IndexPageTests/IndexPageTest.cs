@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PlaywrightUITests
 {
-    //[Ignore("skip")]
+    [Ignore("skip")]
     [Parallelizable(ParallelScope.Self)]
     public class IndexPageTests : PageTest
     {
